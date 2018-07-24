@@ -29,6 +29,10 @@ $(document).ready(function(){
 
     let name = $('#employeeName').val();
     calcBonus(name);
+
+    //reset form
+    $('form')[0].reset();
+
   }
 
 });
@@ -38,7 +42,6 @@ $(document).ready(function(){
 
 //create function to calculate bonus of 1 employee
 function calcBonus(name){
-
 
   //bonus variable
   let bonusPerc = 0;
@@ -58,9 +61,7 @@ function calcBonus(name){
       let reviewRating = employee.reviewRating;
       let employeeIdNumLength = employee.employeeNumber.length;
 
-
       //change salary to number from string
-
       annualSalary = parseInt(annualSalary);
 
       //math
@@ -129,17 +130,27 @@ function calcBonus(name){
         //build object
         let employeeObj = {name: name, bonusPercentage: bonusPerc, totalCompensation: totalComp, totalBonus: bonusTotal};
         console.log(employeeObj);
+
+        //calling append function to add to DOM
+        appendToDOM(employeeObj);
+
         return employeeObj;
 
     }
-
-
-      //return employeeObj;
   }
+}
 
+function appendToDOM(empObj){
 
+  let name = empObj.name;
+  let bonusPerc = empObj.bonusPercentage;
+  let totalComp = empObj.totalCompensation;
+  let totalBonus = empObj.totalBonus;
 
-  //return object
+  $('#bonusOutput').empty();
+
+  //add to DOM
+  $('#bonusOutput').append('<div>'+ name + ' ' + bonusPerc + ' ' + totalComp + ' ' + totalBonus + '</div>');
 
 
 
