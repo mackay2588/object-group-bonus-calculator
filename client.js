@@ -18,3 +18,129 @@ const employees = [ atticus, jem, scout, robert, mayella ];
 // YOU SHOULD NOT NEED TO CHANGE ANYTHING ABOVE THIS POINT
 
 console.log( employees );
+
+
+$(document).ready(function(){
+
+  //on click call get name
+  $('#subBtn').on('click', getName);
+
+  function getName(){
+
+    let name = $('#employeeName').val();
+    calcBonus(name);
+  }
+
+});
+
+
+
+
+//create function to calculate bonus of 1 employee
+function calcBonus(name){
+
+
+  //bonus variable
+  let bonusPerc = 0;
+  let bonusTotal = 0;
+  let totalComp = 0;
+
+  //loop over employees array to get correct employee
+  for( let employee of employees){
+    //make sure correct employee
+    if(employee.name.toLowerCase() == name.toLowerCase()){
+      //get props
+
+      //log name
+      console.log(employee.name);
+
+      let annualSalary = employee.annualSalary;
+      let reviewRating = employee.reviewRating;
+      let employeeIdNumLength = employee.employeeNumber.length;
+
+
+      //change salary to number from string
+
+      annualSalary = parseInt(annualSalary);
+
+      //math
+
+      //fifteen year employee bonus
+      if(employeeIdNumLength === 4){
+        bonusPerc += 0.05;
+        //employee rating bonus
+        if(reviewRating <= 2){
+          bonusPerc = bonusPerc;
+        }
+        else if(reviewRating === 3){
+          bonusPerc += 0.04;
+        }
+        else if(reviewRating === 4){
+          bonusPerc += 0.06;
+        }
+        else if(reviewRating === 5){
+          bonusPerc += 0.10;
+        }
+
+        //if salary about 65k subtract 1%
+        if(annualSalary >= 65000){
+          bonusPerc -= 0.01;
+        }
+      }
+      //less than 15 years
+      else{
+        //employee rating bonus
+        if(reviewRating <= 2){
+          bonusPerc = 0;
+        }
+        if(reviewRating === 3){
+          bonusPerc = 0.04;
+        }
+        else if(reviewRating === 4){
+          bonusPerc = 0.06;
+        }
+        else if(reviewRating === 5){
+          bonusPerc += 0.10;
+        }
+
+        //if salary about 65k subtract 1%
+        if(annualSalary >= 65000){
+          bonusPerc -= 0.01;
+        }
+      }
+
+      //bonus limits
+      if(bonusPerc > 0.13){
+        bonusPerc = 0.13;
+      }
+      else if( bonusPerc < 0){
+        bonusPerc = 0;
+      }
+        console.log(bonusPerc);
+
+      //calc bonus total
+      bonusTotal = annualSalary * bonusPerc;
+        console.log(bonusTotal);
+
+      //calc total comp
+      totalComp = annualSalary + bonusTotal;
+        console.log(totalComp);
+
+        //build object
+        let employeeObj = {name: name, bonusPercentage: bonusPerc, totalCompensation: totalComp, totalBonus: bonusTotal};
+        console.log(employeeObj);
+        return employeeObj;
+
+    }
+
+
+      //return employeeObj;
+  }
+
+
+
+  //return object
+
+
+
+}

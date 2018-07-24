@@ -3,9 +3,18 @@
   <head>
     <meta charset="utf-8">
     <title>Bonus Calculator Object Challenge</title>
+    <!--jquery-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <!--local js-->
     <script src="client.js" charset="utf-8"></script>
+
   </head>
   <body>
     <h1>Bonus Calculator Object Challenge</h1>
+    <form onsubmit="event.preventDefault()">
+      <label for="employeeName">Employee: </label>
+      <input id="employeeName" type="text" placeholder="example: Jem"  required/>
+      <button id="subBtn" type="submit">Submit</button>
+    </form>
   </body>
 </html>
